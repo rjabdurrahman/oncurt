@@ -82,11 +82,38 @@
     .product-container .product button {
         font-size: 14px;
     }
+
+    .cat-nav {
+        width: 200px;
+        position: absolute;
+        z-index: 100;
+        left: -202px;
+    }
+
+    .cat-nav-show {
+        left: 0;
+        transition: 0.3s;
+    }
+
+    ul.w3-ul li ul,
+    ul.w3-ul li:hover ul {
+        display: none;
+    }
+
+    ul.w3-ul li:hover ul {
+        display: block;
+    }
 </style>
 
 <body>
+    <div class="w3-bar w3-light-grey" style="display: flex;padding-top:5px;">
+        <a class="w3-bar-item w3-button">
+            <i class="fa fa-gift" style="font-size:26px"></i>
+        </a>
+        <span style="font-size: 25px;vertical-align: middle;">OnCurt</span>
+    </div>
     <div class="w3-bar w3-light-grey w3-border" style="display: flex">
-        <a href="#" class="w3-bar-item w3-button">
+        <a id="catBtn" class="w3-bar-item w3-button">
             <i class="fa fa-align-justify" style="font-size:24px"></i>
         </a>
         <input type="text" class="w3-bar-item w3-input w3-white" style="width: 100%;overflow: hidden;" placeholder="Search..">
@@ -94,6 +121,24 @@
             <i class="fa fa-search" style="font-size:24px"></i>
         </a>
     </div>
+    <ul id="catUl" class="w3-ul w3-border w3-white cat-nav">
+        <li>
+            <i class="fa fa-minus" style="font-size:14px"></i> CATEGORIES
+        </li>
+        <li>
+            <a>
+                <i class="fa fa-plus" style="font-size:14px"></i> Wemen Fashion</a>
+            <ul class="w3-ul">
+                <li>Payel</li>
+                <li>Churi</li>
+                <li>Ghona</li>
+            </ul>
+        </li>
+        <li>
+            <i class="fa fa-plus" style="font-size:14px"></i> Electronics</li>
+        <li>
+            <i class="fa fa-plus" style="font-size:14px"></i> Mobile</li>
+    </ul>
     <div class="w3-content w3-display-container" style="max-width:800px;position: relative;">
         <img class="mySlides" src="img_nature_wide.jpg" style="width:100%">
         <img class="mySlides" src="img_snow_wide.jpg" style="width:100%">
@@ -145,7 +190,7 @@
         function plusDivs(n) {
             showDivs(slideIndex += n);
         }
-        setInterval(function(){ showDivs(++slideIndex) }, 3000);
+        setInterval(function () { showDivs(++slideIndex) }, 3000);
         function currentDiv(n) {
             showDivs(slideIndex = n);
         }
@@ -165,6 +210,19 @@
             x[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " w3-white";
         }
+        //Category Navigation
+        function $js(id) {
+            return document.getElementById(id);
+        }
+        $js("catBtn").addEventListener('click', function () {
+            var cList = $js("catUl").className.split(' ');
+            if (cList.indexOf("cat-nav-show") == -1) {
+                $js("catUl").classList.add("class", "cat-nav-show");
+            }
+            else {
+                $js("catUl").classList.remove("class", "cat-nav-show");
+            }
+        });
     </script>
 
 </body>
